@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var outfile = "primes.txt";
+
+function isPrime(v) {
+    var i = Math.ceil(Math.sqrt(v));
+    while (i > 1) {
+        var q = v / i;
+        if (Math.floor(q) === q) {
+            return false;
+        }
+        i--;
+    }
+    return true;
+}
+
+var nFound = 1;
+out = "2"
+var cur = 3;
+while (nFound < 101) {
+    if (isPrime(cur)) {
+        out = out + "," + cur;
+        nFound++;
+    }
+    cur++;
+}
+out = out + "\n";
+
+fs.writeFileSync(outfile, out);
+console.log("script: " + __filename + "\noutfile: " + outfile);
